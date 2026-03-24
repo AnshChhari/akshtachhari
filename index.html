@@ -1,212 +1,293 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akshta Chhari | Magical Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --pink: #ffafcc;
-            --purple: #cdb4db;
-            --blue: #a2d2ff;
-            --yellow: #fdf0d5;
-            --white: rgba(255, 255, 255, 0.9);
+import React from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Heart, Sparkles, Star, Flower2, BookOpen, Trophy, Smile } from "lucide-react";
+
+const floatAnim = {
+  initial: { y: 0, scale: 1, rotate: 0 },
+  animate: (i: number) => ({
+    y: [0, -18, 0],
+    rotate: [0, 8, -8, 0],
+    scale: [1, 1.06, 1],
+    transition: {
+      duration: 4 + i * 0.6,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: i * 0.2,
+    },
+  }),
+};
+
+const sparkles = Array.from({ length: 16 }, (_, i) => ({
+  id: i,
+  left: `${(i * 7.3) % 100}%`,
+  top: `${(i * 11.1) % 100}%`,
+  size: 10 + (i % 4) * 6,
+  duration: 5 + (i % 5),
+  delay: (i % 6) * 0.4,
+}));
+
+const milestones = [
+  { icon: BookOpen, title: "Class 8 Student", text: "Curious, bright, and ready to learn new things every day." },
+  { icon: Trophy, title: "Class 7 Completed", text: "Finished with a lovely 90.6% — a beautiful achievement!" },
+  { icon: Smile, title: "Cute & Confident", text: "A soft aesthetic vibe with a cheerful, happy personality." },
+];
+
+export default function CuteAkshtaWebsite() {
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-pink-100 via-rose-50 to-sky-100 text-slate-700">
+      <style>{`
+        @keyframes drift {
+          0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          25% { transform: translateY(-14px) translateX(8px) rotate(4deg); }
+          50% { transform: translateY(-2px) translateX(16px) rotate(0deg); }
+          75% { transform: translateY(10px) translateX(8px) rotate(-4deg); }
+          100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
         }
-
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.35; transform: scale(0.85); }
+          50% { opacity: 1; transform: scale(1.15); }
         }
-
-        body {
-            background: linear-gradient(45deg, #ffc8dd, #ffafcc, #bde0fe, #cdb4db);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        @keyframes floatSlow {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
         }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .glass {
+          background: rgba(255, 255, 255, 0.55);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          border: 1px solid rgba(255, 255, 255, 0.55);
+          box-shadow: 0 12px 40px rgba(255, 182, 193, 0.18);
         }
+        .soft-shadow { box-shadow: 0 10px 30px rgba(244, 114, 182, 0.12); }
+        .ribbon { position: absolute; inset: auto auto 0 0; width: 100%; height: 2px; }
+      `}</style>
 
-        /* --- Floating Magic Elements --- */
-        .magic-item {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            animation: float 6s infinite ease-in-out;
-            font-size: 2rem;
-        }
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {sparkles.map((s) => (
+          <motion.div
+            key={s.id}
+            className="absolute rounded-full bg-white/70 shadow-[0_0_18px_rgba(255,255,255,0.85)]"
+            style={{ left: s.left, top: s.top, width: s.size, height: s.size }}
+            animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.2, 0.8] }}
+            transition={{ duration: s.duration, repeat: Infinity, delay: s.delay, ease: "easeInOut" }}
+          />
+        ))}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(20deg); }
-        }
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full border border-pink-200/70 bg-white/30"
+            style={{
+              left: `${8 + i * 9}%`,
+              top: `${10 + (i % 5) * 15}%`,
+              width: 28 + (i % 3) * 16,
+              height: 28 + (i % 3) * 16,
+            }}
+            animate={{ y: [0, -20, 0], x: [0, 10, 0], opacity: [0.35, 0.7, 0.35] }}
+            transition={{ duration: 6 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+      </div>
 
-        /* --- Main Magical Card --- */
-        .card {
-            background: var(--white);
-            backdrop-filter: blur(10px);
-            border: 8px solid white;
-            border-radius: 50px;
-            padding: 40px 20px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 0px rgba(205, 180, 219, 0.5);
-            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
-        }
+      <main className="relative mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-8">
+        <motion.header
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex items-center justify-between"
+        >
+          <div className="glass soft-shadow inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium">
+            <Heart className="h-4 w-4 text-pink-500" />
+            Cute Corner of Akshta
+          </div>
+          <div className="hidden items-center gap-2 sm:flex">
+            <Badge className="rounded-full bg-pink-200/80 text-pink-900 hover:bg-pink-200">Class 8</Badge>
+            <Badge className="rounded-full bg-sky-200/80 text-sky-900 hover:bg-sky-200">90.6% in Class 7</Badge>
+          </div>
+        </motion.header>
 
-        @keyframes popIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        <section className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-2 lg:gap-14">
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-2 text-sm font-medium text-pink-700 shadow-sm"
+            >
+              <Sparkles className="h-4 w-4" />
+              Sweet, soft, and aesthetic vibes
+            </motion.div>
 
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            font-size: 3rem;
-            color: #ff70a6;
-            margin-bottom: 10px;
-            animation: wobble 3s infinite ease-in-out;
-            text-shadow: 4px 4px 0 white;
-        }
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2 }}
+              className="max-w-xl text-5xl font-black leading-tight tracking-tight text-slate-800 sm:text-6xl lg:text-7xl"
+            >
+              Hi, I’m <span className="bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 bg-clip-text text-transparent">Akshta Chhari</span>.
+            </motion.h1>
 
-        @keyframes wobble {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg) scale(1.05); }
-        }
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.35 }}
+              className="max-w-xl text-lg leading-8 text-slate-600"
+            >
+              A bright class 8 student who completed class 7 with a lovely <span className="font-semibold text-slate-800">90.6%</span>. This page is designed to feel dreamy, cheerful, and super cute.
+            </motion.p>
 
-        .tagline {
-            background: var(--blue);
-            color: white;
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(162, 210, 255, 0.5);
-        }
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.5 }}
+              className="flex flex-wrap gap-3"
+            >
+              <Badge className="rounded-full bg-rose-200/90 px-4 py-2 text-rose-900 hover:bg-rose-200">✨ Proud Achiever</Badge>
+              <Badge className="rounded-full bg-violet-200/90 px-4 py-2 text-violet-900 hover:bg-violet-200">🌸 Cute Aesthetic</Badge>
+              <Badge className="rounded-full bg-amber-200/90 px-4 py-2 text-amber-900 hover:bg-amber-200">💫 Positive Energy</Badge>
+            </motion.div>
 
-        /* --- Info Sections --- */
-        .info-bit {
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: slideUp 0.8s forwards;
-        }
-        .info-bit:nth-child(1) { animation-delay: 0.5s; }
-        .info-bit:nth-child(2) { animation-delay: 0.7s; }
-        .info-bit:nth-child(3) { animation-delay: 0.9s; }
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.65 }}
+              className="flex flex-wrap gap-4"
+            >
+              <motion.div
+                whileHover={{ scale: 1.04, rotate: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="glass soft-shadow flex items-center gap-3 rounded-3xl px-5 py-4"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-pink-100 text-pink-600">
+                  <Star className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">Result</p>
+                  <p className="text-lg font-bold text-slate-800">90.6%</p>
+                </div>
+              </motion.div>
 
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+              <motion.div
+                whileHover={{ scale: 1.04, rotate: 1 }}
+                whileTap={{ scale: 0.98 }}
+                className="glass soft-shadow flex items-center gap-3 rounded-3xl px-5 py-4"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-100 text-sky-600">
+                  <Flower2 className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-sm text-slate-500">Grade</p>
+                  <p className="text-lg font-bold text-slate-800">Class 8</p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
 
-        .icon {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 5px;
-            animation: heartBeat 1.5s infinite;
-        }
+          <div className="relative flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative w-full max-w-md"
+            >
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="glass soft-shadow relative overflow-hidden rounded-[2rem] p-6 sm:p-7"
+              >
+                <div className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-pink-200/50 blur-3xl" />
+                <div className="absolute -bottom-10 -left-10 h-36 w-36 rounded-full bg-sky-200/50 blur-3xl" />
 
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
+                <div className="relative space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700">
+                      <Sparkles className="h-4 w-4 text-pink-500" />
+                      Aesthetic Profile
+                    </div>
+                    <div className="flex gap-1">
+                      <span className="h-3 w-3 rounded-full bg-pink-300" />
+                      <span className="h-3 w-3 rounded-full bg-amber-300" />
+                      <span className="h-3 w-3 rounded-full bg-sky-300" />
+                    </div>
+                  </div>
 
-        h3 { color: #b185db; font-size: 1.4rem; margin-bottom: 5px; }
-        p { color: #5e548e; line-height: 1.4; font-weight: 500; }
+                  <div className="rounded-[1.75rem] bg-white/65 p-5">
+                    <div className="flex items-center gap-4">
+                      <motion.div
+                        variants={floatAnim}
+                        initial="initial"
+                        animate="animate"
+                        custom={1}
+                        className="flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-pink-200 to-rose-200 text-3xl shadow-lg"
+                      >
+                        🌷
+                      </motion.div>
+                      <div>
+                        <p className="text-sm font-medium text-slate-500">Made for</p>
+                        <h2 className="text-2xl font-black text-slate-800">Akshta Chhari</h2>
+                        <p className="mt-1 text-sm text-slate-600">Class 8 • Soft colors • Cute animations</p>
+                      </div>
+                    </div>
+                  </div>
 
-        /* --- Interactive Sparkles --- */
-        .sparkle {
-            position: absolute;
-            background: white;
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: sparkleAnim 1s linear forwards;
-        }
+                  <div className="grid gap-4 sm:grid-cols-3">
+                    {milestones.map((item, index) => {
+                      const Icon = item.icon;
+                      return (
+                        <motion.div
+                          key={item.title}
+                          whileHover={{ y: -6, scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                          className="rounded-[1.5rem] bg-white/65 p-4"
+                        >
+                          <motion.div
+                            animate={{ rotate: [0, 8, -8, 0] }}
+                            transition={{ duration: 4.5, repeat: Infinity, delay: index * 0.3 }}
+                            className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-pink-100 text-pink-600"
+                          >
+                            <Icon className="h-5 w-5" />
+                          </motion.div>
+                          <h3 className="text-sm font-bold text-slate-800">{item.title}</h3>
+                          <p className="mt-1 text-xs leading-5 text-slate-600">{item.text}</p>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </motion.div>
 
-        @keyframes sparkleAnim {
-            0% { transform: translate(0,0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
-        }
+              <motion.div
+                animate={{ y: [0, -14, 0], rotate: [0, 3, 0] }}
+                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -left-6 top-8 hidden rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-pink-700 shadow-md sm:block"
+              >
+                cute ✿
+              </motion.div>
 
-        footer {
-            margin-top: 30px;
-            font-weight: 700;
-            color: #ff99c8;
-            letter-spacing: 2px;
-        }
-    </style>
-</head>
-<body onmousemove="createSparkle(event)" ontouchmove="createSparkle(event)">
+              <motion.div
+                animate={{ y: [0, 12, 0], rotate: [0, -4, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -right-2 bottom-10 hidden rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-sky-700 shadow-md sm:block"
+              >
+                shine ✦
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-    <div class="magic-item" style="top:10%; left:10%; animation-delay: 0s;">🌈</div>
-    <div class="magic-item" style="top:60%; right:15%; animation-delay: -2s;">⭐</div>
-    <div class="magic-item" style="top:80%; left:20%; animation-delay: -4s;">☁️</div>
-    <div class="magic-item" style="top:20%; right:5%; animation-delay: -1s;">💖</div>
-
-    <div class="card">
-        <h1>Akshta Chhari</h1>
-        <div class="tagline">Magical Grade 8 Student</div>
-
-        <div class="info-bit">
-            <span class="icon">🎨</span>
-            <h3>Artist Talent</h3>
-            <p>I specialize in Drawing, Sketching, and Painting vibrant worlds!</p>
-        </div>
-
-        <div class="info-bit">
-            <span class="icon">🔬</span>
-            <h3>Science Seeker</h3>
-            <p>Exploring the wonders of the universe at Vandana Convent School.</p>
-        </div>
-
-        <div class="info-bit">
-            <span class="icon">✨</span>
-            <h3>Dreamer</h3>
-            <p>Believing in the magic of friendship and creativity every single day.</p>
-        </div>
-
-        <footer>STAY MAGICAL</footer>
+        <motion.footer
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="pb-4 text-center text-sm text-slate-500"
+        >
+          <div className="mx-auto mb-3 h-px w-40 bg-gradient-to-r from-transparent via-pink-300 to-transparent" />
+          Made with lots of sparkle, pastel love, and happy energy.
+        </motion.footer>
+      </main>
     </div>
-
-    <script>
-        function createSparkle(e) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            
-            // Handle both mouse and touch
-            const x = e.clientX || e.touches[0].clientX;
-            const y = e.clientY || e.touches[0].clientY;
-            
-            sparkle.style.left = x + 'px';
-            sparkle.style.top = y + 'px';
-            
-            // Random direction for particles
-            const moveX = (Math.random() - 0.5) * 100;
-            const moveY = (Math.random() - 0.5) * 100;
-            sparkle.style.setProperty('--x', moveX + 'px');
-            sparkle.style.setProperty('--y', moveY + 'px');
-            
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1000);
-        }
-    </script>
-</body>
-</html>
+  );
+}
