@@ -3,176 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akshta Chhari | Celestial Art & Science</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Akshta Chhari // Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --royal-purple: #5e548e;
-            --magic-pink: #ff70a6;
-            --gold: #ffdf00;
-            --deep-space: #231942;
-            --stardust: rgba(255, 255, 255, 0.8);
+            --bg: #0a0a0a;
+            --card-bg: #141414;
+            --accent-purple: #7b2cbf;
+            --accent-gold: #ffb703;
+            --text-main: #e0e0e0;
+            --text-dim: #888;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(180deg, #231942 0%, #5e548e 100%);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.5;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* --- Elegant Background Particles --- */
-        .star {
-            position: fixed;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: twinkle 5s infinite;
-            z-index: -1;
-        }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; transform: scale(1.2); } }
-
-        /* --- Header: Mature MLP Vibes --- */
-        header {
-            padding: 60px 20px 30px;
-            text-align: center;
+        /* --- Bento Grid Layout --- */
+        .wrapper {
             width: 100%;
+            max-width: 500px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--accent-gold);
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 10vw, 3.5rem);
-            font-style: italic;
-            background: linear-gradient(to bottom, var(--gold), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            font-weight: 700;
             letter-spacing: -1px;
+            color: #fff;
         }
 
-        .subtitle {
-            font-weight: 300;
-            letter-spacing: 3px;
+        .loc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
             text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* --- Bento Cards --- */
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            transition: border 0.3s ease;
+        }
+
+        .bento-card:hover { border-color: var(--accent-purple); }
+
+        .label {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
-            color: var(--magic-pink);
+            color: var(--accent-purple);
+            margin-bottom: 12px;
+            display: block;
+            font-weight: bold;
         }
 
-        /* --- Content Cards --- */
-        .container { width: 100%; max-width: 450px; padding: 0 20px 120px; }
+        .bio-text { font-size: 1.1rem; font-weight: 300; }
+        .bio-text span { color: var(--accent-gold); font-weight: 500; }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .glass-card h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 15px; color: var(--gold); }
-        .glass-card p { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
-
-        /* --- Snake Game: Star-Chaser --- */
-        #game-container {
+        /* --- The "Stardust" Game Engine --- */
+        #game-canvas-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #000;
+            border-radius: 16px;
             position: relative;
-            background: rgba(0,0,0,0.3);
-            border-radius: 18px;
-            border: 1px solid var(--royal-purple);
             overflow: hidden;
         }
 
-        canvas { display: block; width: 100%; height: auto; }
+        canvas { display: block; width: 100%; height: 100%; }
 
-        .stats { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 1px; }
+        .score-ui {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
 
-        /* --- Magical Joystick --- */
-        #joy-wrapper {
-            margin: 30px auto 0;
+        /* --- Founder Style Joystick --- */
+        .control-pad {
+            margin-top: 20px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #joy-base {
             width: 100px; height: 100px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,215,0,0.2);
+            border: 1px solid var(--border);
             border-radius: 50%;
             position: relative;
+            background: rgba(255,255,255,0.02);
             touch-action: none;
         }
-        #joy-stick {
-            width: 44px; height: 44px;
-            background: radial-gradient(circle, var(--magic-pink), var(--royal-purple));
+
+        #joy-thumb {
+            width: 40px; height: 40px;
+            background: var(--accent-purple);
             border-radius: 50%;
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px var(--magic-pink);
+            box-shadow: 0 0 20px rgba(123, 44, 191, 0.4);
         }
 
-        /* --- Bottom Dock --- */
-        .bottom-nav {
-            position: fixed; bottom: 25px;
-            width: calc(100% - 40px); max-width: 350px;
-            height: 65px;
-            background: rgba(255,255,255,0.07);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 35px;
-            display: flex; justify-content: space-around; align-items: center;
-            z-index: 1000;
+        /* --- Terminal Navbar --- */
+        .navbar {
+            position: fixed;
+            bottom: 24px;
+            width: 90%;
+            max-width: 400px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 20px;
         }
-        .nav-icon { font-size: 1.4rem; cursor: pointer; opacity: 0.6; transition: 0.3s; }
-        .nav-icon:hover { opacity: 1; transform: scale(1.1); }
+
+        .nav-item {
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-item.active { color: var(--accent-gold); }
+
     </style>
 </head>
 <body>
 
-    <script>
-        // Generate background stars
-        for(let i=0; i<40; i++) {
-            let star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = Math.random() * 3 + 'px';
-            star.style.height = star.style.width;
-            star.style.top = Math.random() * 100 + 'vh';
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(star);
-        }
-    </script>
+    <div class="wrapper">
+        <header>
+            <div class="loc"><span class="status-dot"></span>Vandana Convent // 8th Grade</div>
+            <h1>Akshta Chhari</h1>
+            <div class="loc">Artist & Future Scientist</div>
+        </header>
 
-    <header>
-        <p class="subtitle">Artistry & Discovery</p>
-        <h1>Akshta Chhari</h1>
-    </header>
-
-    <div class="container">
-        <div class="glass-card">
-            <h2>The Vision</h2>
-            <p>Exploring the intersection of vibrant art and scientific wonder. Student at <strong>Vandana Convent School</strong>, specializing in sketching, painting, and the mysteries of the natural world.</p>
+        <div class="bento-card">
+            <span class="label">// MISSION_STATEMENT</span>
+            <p class="bio-text">Bridging the gap between <span>Fine Art</span> and <span>Scientific Theory</span>. Dedicated to sketching the unseen world.</p>
         </div>
 
-        <div class="glass-card">
-            <div class="stats">
-                <span>MAGICAL ENERGY: <span id="score">0</span></span>
-                <span>LEGACY: <span id="hi">0</span></span>
+        <div class="bento-card" style="padding: 15px;">
+            <div class="score-ui">
+                <span>SYSTEM.LOG: COLLISION_COUNT_<span id="score">0</span></span>
+                <span>HI_SCORE: <span id="hi">0</span></span>
             </div>
-            <div id="game-container">
+            <div id="game-canvas-container">
                 <canvas id="game" width="300" height="300"></canvas>
             </div>
-            <div id="joy-wrapper">
-                <div id="joy-stick"></div>
+            <div class="control-pad">
+                <div id="joy-base">
+                    <div id="joy-thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-card">
+            <span class="label">// CORE_STACK</span>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Oil Painting</code>
+                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Microbiology</code>
+                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Charcoal Sketching</code>
             </div>
         </div>
     </div>
 
-    <div class="bottom-nav">
-        <div class="nav-icon" onclick="location.reload()">✨</div>
-        <div class="nav-icon">🔭</div>
-        <div class="nav-icon">🎨</div>
+    <div class="navbar">
+        <span class="nav-item active" onclick="location.reload()">ROOT/</span>
+        <span class="nav-item">WORKS/</span>
+        <span class="nav-item">RESEARCH/</span>
     </div>
 
     <script>
@@ -182,92 +221,92 @@
         
         let snake = [{x: 10, y: 10}];
         let food = {x: 5, y: 5};
-        let dx = 0, dy = 0;
-        let score = 0, hi = 0;
-        const size = 15; // Grid size
+        let dx = 1, dy = 0;
+        let score = 0;
+        const size = 15;
 
         function init() {
             snake = [{x: 10, y: 10}];
             dx = 1; dy = 0; score = 0;
             scoreDisplay.innerText = score;
             spawnFood();
-            run();
         }
 
         function spawnFood() {
             food = {
-                x: Math.floor(Math.random() * (canvas.width/size)),
-                y: Math.floor(Math.random() * (canvas.height/size))
+                x: Math.floor(Math.random() * 20),
+                y: Math.floor(Math.random() * 20)
             };
         }
 
-        function run() {
+        function update() {
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
 
-            // Wall/Self Collision
             if(head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || snake.some(s => s.x === head.x && s.y === head.y)) {
-                return init();
-            }
-
-            snake.unshift(head);
-            if(head.x === food.x && head.y === food.y) {
-                score++;
-                scoreDisplay.innerText = score;
-                if(navigator.vibrate) navigator.vibrate(20);
-                spawnFood();
+                init();
             } else {
-                snake.pop();
+                snake.unshift(head);
+                if(head.x === food.x && head.y === food.y) {
+                    score++;
+                    scoreDisplay.innerText = score;
+                    if(navigator.vibrate) navigator.vibrate(20);
+                    spawnFood();
+                } else {
+                    snake.pop();
+                }
             }
-
             draw();
-            setTimeout(run, 150);
+            setTimeout(update, 120);
         }
 
         function draw() {
-            ctx.fillStyle = '#1a1433';
+            ctx.fillStyle = '#000';
             ctx.fillRect(0,0,300,300);
 
-            // Draw Element of Harmony (Food)
-            ctx.fillStyle = '#ffdf00';
-            ctx.shadowBlur = 15; ctx.shadowColor = '#ffdf00';
+            // Food (Element of Harmony)
+            ctx.shadowBlur = 10; ctx.shadowColor = '#ffb703';
+            ctx.fillStyle = '#ffb703';
             ctx.beginPath();
-            ctx.arc(food.x*size+7.5, food.y*size+7.5, 5, 0, Math.PI*2);
+            ctx.arc(food.x*size+7.5, food.y*size+7.5, 4, 0, Math.PI*2);
             ctx.fill();
 
-            // Draw Stardust Trail (Snake)
+            // Snake (Stardust Trail)
             snake.forEach((s, i) => {
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = i === 0 ? '#ff70a6' : '#a29bfe';
-                ctx.fillStyle = i === 0 ? '#ff70a6' : 'rgba(162, 155, 254, '+(1 - i/snake.length)+')';
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = i === 0 ? '#7b2cbf' : 'rgba(123, 44, 191, 0.3)';
+                ctx.fillStyle = i === 0 ? '#7b2cbf' : 'rgba(123, 44, 191, '+(1 - i/snake.length)+')';
                 ctx.beginPath();
-                ctx.arc(s.x*size+7.5, s.y*size+7.5, 6 - (i*0.2), 0, Math.PI*2);
+                ctx.arc(s.x*size+7.5, s.y*size+7.5, 6 - (i*0.3), 0, Math.PI*2);
                 ctx.fill();
             });
             ctx.shadowBlur = 0;
         }
 
-        // Joystick Logic
-        const joy = document.getElementById('joy-wrapper');
-        const stick = document.getElementById('joy-stick');
-        joy.addEventListener('touchmove', (e) => {
+        // Joystick Control
+        const base = document.getElementById('joy-base');
+        const thumb = document.getElementById('joy-thumb');
+        
+        base.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
-            const rect = joy.getBoundingClientRect();
+            const rect = base.getBoundingClientRect();
             const x = touch.clientX - (rect.left + 50);
             const y = touch.clientY - (rect.top + 50);
-            const dist = Math.min(Math.sqrt(x*x + y*y), 30);
+            const dist = Math.min(Math.sqrt(x*x + y*y), 40);
             const angle = Math.atan2(y, x);
-            
-            stick.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
 
-            if(dist > 15) {
+            thumb.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
+
+            if(dist > 20) {
                 if(Math.abs(x) > Math.abs(y)) { dx = x > 0 ? 1 : -1; dy = 0; }
                 else { dy = y > 0 ? 1 : -1; dx = 0; }
             }
         });
-        joy.addEventListener('touchend', () => stick.style.transform = 'translate(-50%, -50%)');
+
+        base.addEventListener('touchend', () => thumb.style.transform = 'translate(-50%, -50%)');
 
         init();
+        update();
     </script>
 </body>
 </html>
