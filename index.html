@@ -3,31 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akshta Chhari | Kawaii Creative Space</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Akshta Chhari | Celestial Art & Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink: #ffafcc;
-            --lavender: #cdb4db;
-            --blue: #a2d2ff;
-            --mint: #bde0fe;
-            --white-glass: rgba(255, 255, 255, 0.6);
-            --border-glass: rgba(255, 255, 255, 0.8);
-            --text-dark: #4a4a4a;
+            --royal-purple: #5e548e;
+            --magic-pink: #ff70a6;
+            --gold: #ffdf00;
+            --deep-space: #231942;
+            --stardust: rgba(255, 255, 255, 0.8);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* Prevent text selection while playing */
-            user-select: none; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #fff0f5 0%, #e0ffff 100%);
-            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(180deg, #231942 0%, #5e548e 100%);
+            color: white;
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
@@ -35,455 +27,247 @@
             align-items: center;
         }
 
-        /* --- 3D Floating Bubbles --- */
-        .bubble {
+        /* --- Elegant Background Particles --- */
+        .star {
             position: fixed;
+            background: white;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2));
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-            backdrop-filter: blur(4px);
+            opacity: 0.3;
+            animation: twinkle 5s infinite;
             z-index: -1;
-            animation: float 10s infinite ease-in-out alternate;
         }
-        .b1 { width: 120px; height: 120px; top: 5%; left: 5%; animation-duration: 12s; }
-        .b2 { width: 180px; height: 180px; bottom: 15%; right: -20px; animation-duration: 15s; animation-delay: -5s; }
-        .b3 { width: 80px; height: 80px; top: 40%; right: 10%; animation-duration: 9s; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; transform: scale(1.2); } }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-30px) rotate(15deg); }
-        }
-
-        /* --- Glassmorphism UI --- */
-        .container {
-            width: 100%;
-            max-width: 500px; /* Kept narrow for mobile-first feel */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            z-index: 1;
-            padding-bottom: 100px; /* Space for bottom nav */
-        }
-
-        .glass-card {
-            background: var(--white-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 2px solid var(--border-glass);
-            border-radius: 35px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        /* --- Header: Mature MLP Vibes --- */
+        header {
+            padding: 60px 20px 30px;
             text-align: center;
+            width: 100%;
         }
 
         h1 {
-            font-family: 'Pacifico', cursive;
-            color: #ff85a1;
-            font-size: 2.8rem;
-            line-height: 1.2;
-            text-shadow: 2px 2px 4px rgba(255,175,204,0.3);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 10vw, 3.5rem);
+            font-style: italic;
+            background: linear-gradient(to bottom, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: -1px;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            color: var(--lavender);
-            margin-bottom: 10px;
+        .subtitle {
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            color: var(--magic-pink);
         }
 
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
+        /* --- Content Cards --- */
+        .container { width: 100%; max-width: 450px; padding: 0 20px 120px; }
 
-        .badge {
-            background: linear-gradient(135deg, var(--mint), var(--blue));
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(162, 210, 255, 0.4);
-        }
-
-        /* --- Game Area --- */
-        #game-board {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1/1; /* Keeps it square */
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            border: 3px dashed var(--pink);
-            overflow: hidden;
-            margin-top: 10px;
-            touch-action: none; /* Prevents scrolling when touching the game */
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .score-row {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        #level-up {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: var(--pink);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-family: 'Pacifico', cursive;
-            font-size: 2rem;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 25px rgba(255, 175, 204, 0.6);
-            pointer-events: none;
-        }
-        #level-up.show { transform: translate(-50%, -50%) scale(1); }
-
-        /* --- Virtual Joystick --- */
-        .joystick-container {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px solid var(--mint);
-            border-radius: 50%;
-            position: relative;
-            margin: 20px auto 0 auto;
-            touch-action: none;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
-        }
-
-        .joystick-thumb {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle at 30% 30%, var(--pink), #ff85a1);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 5px 15px rgba(255, 175, 204, 0.6);
-            transition: background 0.2s;
-        }
-
-        /* --- Bottom Nav Bar --- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            width: 90%;
-            max-width: 400px;
-            background: var(--white-glass);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
-            border: 2px solid var(--border-glass);
-            border-radius: 40px;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .nav-btn {
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .nav-btn:hover, .nav-btn:active {
-            transform: scale(1.2) rotate(-10deg);
+        .glass-card h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 15px; color: var(--gold); }
+        .glass-card p { font-size: 0.95rem; line-height: 1.6; opacity: 0.9; font-weight: 300; }
+
+        /* --- Snake Game: Star-Chaser --- */
+        #game-container {
+            position: relative;
+            background: rgba(0,0,0,0.3);
+            border-radius: 18px;
+            border: 1px solid var(--royal-purple);
+            overflow: hidden;
         }
 
-        /* Built-in Confetti Canvas */
-        #confetti-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 999;
+        canvas { display: block; width: 100%; height: auto; }
+
+        .stats { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- Magical Joystick --- */
+        #joy-wrapper {
+            margin: 30px auto 0;
+            width: 100px; height: 100px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 50%;
+            position: relative;
+            touch-action: none;
         }
+        #joy-stick {
+            width: 44px; height: 44px;
+            background: radial-gradient(circle, var(--magic-pink), var(--royal-purple));
+            border-radius: 50%;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px var(--magic-pink);
+        }
+
+        /* --- Bottom Dock --- */
+        .bottom-nav {
+            position: fixed; bottom: 25px;
+            width: calc(100% - 40px); max-width: 350px;
+            height: 65px;
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 35px;
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 1000;
+        }
+        .nav-icon { font-size: 1.4rem; cursor: pointer; opacity: 0.6; transition: 0.3s; }
+        .nav-icon:hover { opacity: 1; transform: scale(1.1); }
     </style>
 </head>
 <body>
 
-    <div class="bubble b1"></div>
-    <div class="bubble b2"></div>
-    <div class="bubble b3"></div>
-    <canvas id="confetti-canvas"></canvas>
+    <script>
+        // Generate background stars
+        for(let i=0; i<40; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <header>
+        <p class="subtitle">Artistry & Discovery</p>
+        <h1>Akshta Chhari</h1>
+    </header>
 
     <div class="container">
-        <div class="glass-card" style="padding-top: 40px;">
-            <h1>Akshta Chhari</h1>
-            <h2>Grade 8 • Vandana Convent</h2>
-            <p>I love bringing imagination to life through <strong>Drawing, Sketching, and Painting</strong>. When I'm not creating art, I'm exploring the amazing world of <strong>Science!</strong></p>
-            <div class="badges">
-                <span class="badge">🎨 Artist</span>
-                <span class="badge">🔬 Scientist</span>
-                <span class="badge">✨ Creator</span>
-            </div>
+        <div class="glass-card">
+            <h2>The Vision</h2>
+            <p>Exploring the intersection of vibrant art and scientific wonder. Student at <strong>Vandana Convent School</strong>, specializing in sketching, painting, and the mysteries of the natural world.</p>
         </div>
 
         <div class="glass-card">
-            <div class="score-row">
-                <span>Score: <span id="score" style="color:var(--pink);">0</span></span>
-                <span>High: <span id="high-score" style="color:var(--blue);">0</span></span>
+            <div class="stats">
+                <span>MAGICAL ENERGY: <span id="score">0</span></span>
+                <span>LEGACY: <span id="hi">0</span></span>
             </div>
-            
-            <div id="game-board">
-                <canvas id="gameCanvas" width="300" height="300"></canvas>
-                <div id="level-up">Level Up! 🌟</div>
+            <div id="game-container">
+                <canvas id="game" width="300" height="300"></canvas>
             </div>
-
-            <p style="font-size: 0.85rem; color: #888; margin-top: 15px;">Eat the science tools to grow your pearl chain!</p>
-
-            <div class="joystick-container" id="joystick">
-                <div class="joystick-thumb" id="thumb"></div>
+            <div id="joy-wrapper">
+                <div id="joy-stick"></div>
             </div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <button class="nav-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">🏠</button>
-        <button class="nav-btn" onclick="initGame()">🔄</button>
-        <button class="nav-btn">💖</button>
+        <div class="nav-icon" onclick="location.reload()">✨</div>
+        <div class="nav-icon">🔭</div>
+        <div class="nav-icon">🎨</div>
     </div>
 
     <script>
-        // --- Game Setup & Variables ---
-        const canvas = document.getElementById('gameCanvas');
+        const canvas = document.getElementById('game');
         const ctx = canvas.getContext('2d');
-        const scoreEl = document.getElementById('score');
-        const highScoreEl = document.getElementById('high-score');
-        const levelUpMsg = document.getElementById('level-up');
+        const scoreDisplay = document.getElementById('score');
         
-        const gridSize = 20; // 300 / 20 = 15x15 grid
-        const tileCount = 15;
-        const scienceIcons = ['🔬', '⚛️', '🧪', '🧬', '🔭', '🪐'];
-        const pearlColors = ['#ffafcc', '#cdb4db', '#a2d2ff', '#bde0fe', '#ffc8dd'];
-        
-        let snake, dx, dy, foodX, foodY, currentFoodIcon, score, highScore = 0, speed, gameLoop;
+        let snake = [{x: 10, y: 10}];
+        let food = {x: 5, y: 5};
+        let dx = 0, dy = 0;
+        let score = 0, hi = 0;
+        const size = 15; // Grid size
 
-        // --- Core Game Functions ---
-        function initGame() {
-            clearTimeout(gameLoop);
-            snake = [
-                {x: 7, y: 7},
-                {x: 6, y: 7},
-                {x: 5, y: 7}
-            ];
-            dx = 1; dy = 0;
-            score = 0;
-            speed = 180; // Milliseconds between frames (lower is faster)
-            scoreEl.innerText = score;
-            placeFood();
-            levelUpMsg.classList.remove('show');
-            update();
+        function init() {
+            snake = [{x: 10, y: 10}];
+            dx = 1; dy = 0; score = 0;
+            scoreDisplay.innerText = score;
+            spawnFood();
+            run();
         }
 
-        function placeFood() {
-            foodX = Math.floor(Math.random() * tileCount);
-            foodY = Math.floor(Math.random() * tileCount);
-            currentFoodIcon = scienceIcons[Math.floor(Math.random() * scienceIcons.length)];
-            // Prevent food spawning on snake
-            for(let part of snake) {
-                if(part.x === foodX && part.y === foodY) placeFood();
-            }
+        function spawnFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width/size)),
+                y: Math.floor(Math.random() * (canvas.height/size))
+            };
         }
 
-        function update() {
-            // Move Snake
+        function run() {
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
 
-            // Wall Collision (Game Over -> Reset)
-            if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-                return initGame();
+            // Wall/Self Collision
+            if(head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || snake.some(s => s.x === head.x && s.y === head.y)) {
+                return init();
             }
 
-            // Self Collision
-            for (let i = 0; i < snake.length; i++) {
-                if (head.x === snake[i].x && head.y === snake[i].y) {
-                    return initGame();
-                }
-            }
-
-            snake.unshift(head); // Add new head
-
-            // Check if ate food
-            if (head.x === foodX && head.y === foodY) {
+            snake.unshift(head);
+            if(head.x === food.x && head.y === food.y) {
                 score++;
-                scoreEl.innerText = score;
-                
-                // Haptic Feedback for mobile
-                if(navigator.vibrate) navigator.vibrate(50);
-
-                if (score > highScore) {
-                    highScore = score;
-                    highScoreEl.innerText = highScore;
-                }
-
-                // Level Up Logic
-                if (score === 10) {
-                    levelUpMsg.classList.add('show');
-                    fireConfetti();
-                    speed = 130; // Speed up
-                    setTimeout(() => levelUpMsg.classList.remove('show'), 2000);
-                }
-
-                placeFood();
+                scoreDisplay.innerText = score;
+                if(navigator.vibrate) navigator.vibrate(20);
+                spawnFood();
             } else {
-                snake.pop(); // Remove tail if no food eaten
+                snake.pop();
             }
 
             draw();
-            gameLoop = setTimeout(update, speed);
+            setTimeout(run, 150);
         }
 
         function draw() {
-            // Clear board
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#1a1433';
+            ctx.fillRect(0,0,300,300);
 
-            // Draw Food
-            ctx.font = "20px Arial";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(currentFoodIcon, foodX * gridSize + gridSize/2, foodY * gridSize + gridSize/2);
+            // Draw Element of Harmony (Food)
+            ctx.fillStyle = '#ffdf00';
+            ctx.shadowBlur = 15; ctx.shadowColor = '#ffdf00';
+            ctx.beginPath();
+            ctx.arc(food.x*size+7.5, food.y*size+7.5, 5, 0, Math.PI*2);
+            ctx.fill();
 
-            // Draw Snake (Shining Pearls)
-            snake.forEach((part, index) => {
-                const color = pearlColors[index % pearlColors.length];
-                const x = part.x * gridSize + gridSize/2;
-                const y = part.y * gridSize + gridSize/2;
-                
-                // Pearl Gradient
-                const gradient = ctx.createRadialGradient(x-3, y-3, 2, x, y, 10);
-                gradient.addColorStop(0, '#ffffff');
-                gradient.addColorStop(1, color);
-
+            // Draw Stardust Trail (Snake)
+            snake.forEach((s, i) => {
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = i === 0 ? '#ff70a6' : '#a29bfe';
+                ctx.fillStyle = i === 0 ? '#ff70a6' : 'rgba(162, 155, 254, '+(1 - i/snake.length)+')';
                 ctx.beginPath();
-                ctx.arc(x, y, gridSize/2 - 1, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
+                ctx.arc(s.x*size+7.5, s.y*size+7.5, 6 - (i*0.2), 0, Math.PI*2);
                 ctx.fill();
-                
-                // Add "eyes" to the head
-                if (index === 0) {
-                    ctx.fillStyle = "#4a4a4a";
-                    ctx.beginPath(); ctx.arc(x - 3, y - 3, 2, 0, Math.PI*2); ctx.fill();
-                    ctx.beginPath(); ctx.arc(x + 3, y - 3, 2, 0, Math.PI*2); ctx.fill();
-                }
             });
+            ctx.shadowBlur = 0;
         }
 
-        // --- Virtual Joystick Logic ---
-        const joy = document.getElementById('joystick');
-        const thumb = document.getElementById('thumb');
-        let joyCenter = {x:0, y:0};
-        let maxDist = 35; // How far thumb can move
-
-        function handleTouch(e) {
-            e.preventDefault(); // Stop scrolling
-            const touch = e.targetTouches[0] || e.changedTouches[0];
+        // Joystick Logic
+        const joy = document.getElementById('joy-wrapper');
+        const stick = document.getElementById('joy-stick');
+        joy.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
             const rect = joy.getBoundingClientRect();
+            const x = touch.clientX - (rect.left + 50);
+            const y = touch.clientY - (rect.top + 50);
+            const dist = Math.min(Math.sqrt(x*x + y*y), 30);
+            const angle = Math.atan2(y, x);
             
-            // Calculate center of joystick
-            joyCenter.x = rect.left + rect.width / 2;
-            joyCenter.y = rect.top + rect.height / 2;
+            stick.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
 
-            let touchX = touch.clientX - joyCenter.x;
-            let touchY = touch.clientY - joyCenter.y;
-
-            // Calculate angle and distance
-            const angle = Math.atan2(touchY, touchX);
-            const dist = Math.min(Math.hypot(touchX, touchY), maxDist);
-
-            // Move visual thumb
-            const thumbX = Math.cos(angle) * dist;
-            const thumbY = Math.sin(angle) * dist;
-            thumb.style.transform = `translate(calc(-50% + ${thumbX}px), calc(-50% + ${thumbY}px))`;
-
-            // Convert angle to 4-way direction for Snake
-            if (dist > 10) { // Deadzone
-                const deg = angle * 180 / Math.PI;
-                if (deg > -45 && deg <= 45 && dx === 0) { dx = 1; dy = 0; } // Right
-                else if (deg > 45 && deg <= 135 && dy === 0) { dx = 0; dy = 1; } // Down
-                else if ((deg > 135 || deg <= -135) && dx === 0) { dx = -1; dy = 0; } // Left
-                else if (deg > -135 && deg <= -45 && dy === 0) { dx = 0; dy = -1; } // Up
+            if(dist > 15) {
+                if(Math.abs(x) > Math.abs(y)) { dx = x > 0 ? 1 : -1; dy = 0; }
+                else { dy = y > 0 ? 1 : -1; dx = 0; }
             }
-        }
-
-        function resetThumb() {
-            thumb.style.transform = 'translate(-50%, -50%)';
-        }
-
-        joy.addEventListener('touchstart', handleTouch, {passive: false});
-        joy.addEventListener('touchmove', handleTouch, {passive: false});
-        joy.addEventListener('touchend', resetThumb);
-
-        // Keyboard support for testing on PC
-        window.addEventListener('keydown', e => {
-            if(e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; }
-            if(e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
-            if(e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; }
-            if(e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
         });
+        joy.addEventListener('touchend', () => stick.style.transform = 'translate(-50%, -50%)');
 
-        // --- Custom Built-in Confetti System ---
-        const confCanvas = document.getElementById('confetti-canvas');
-        const confCtx = confCanvas.getContext('2d');
-        let particles = [];
-
-        function resizeConfetti() {
-            confCanvas.width = window.innerWidth;
-            confCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeConfetti);
-        resizeConfetti();
-
-        function fireConfetti() {
-            particles = [];
-            for(let i=0; i<100; i++) {
-                particles.push({
-                    x: confCanvas.width / 2,
-                    y: confCanvas.height / 2,
-                    r: Math.random() * 6 + 2,
-                    dx: Math.random() * 10 - 5,
-                    dy: Math.random() * -10 - 2,
-                    color: pearlColors[Math.floor(Math.random() * pearlColors.length)]
-                });
-            }
-            animateConfetti();
-        }
-
-        function animateConfetti() {
-            if(particles.length === 0) return;
-            confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
-            particles.forEach((p, i) => {
-                p.x += p.dx;
-                p.y += p.dy;
-                p.dy += 0.3; // Gravity
-                confCtx.beginPath();
-                confCtx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                confCtx.fillStyle = p.color;
-                confCtx.fill();
-                if(p.y > confCanvas.height) particles.splice(i, 1);
-            });
-            requestAnimationFrame(animateConfetti);
-        }
-
-        // Start everything
-        initGame();
-
+        init();
     </script>
 </body>
 </html>
