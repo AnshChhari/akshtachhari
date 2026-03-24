@@ -3,310 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Akshta Chhari // Creative Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Akshta Chhari | Magical Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --card-bg: #141414;
-            --accent-purple: #7b2cbf;
-            --accent-gold: #ffb703;
-            --text-main: #e0e0e0;
-            --text-dim: #888;
-            --border: rgba(255, 255, 255, 0.1);
+            --pink: #ffafcc;
+            --purple: #cdb4db;
+            --blue: #a2d2ff;
+            --yellow: #fdf0d5;
+            --white: rgba(255, 255, 255, 0.9);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: linear-gradient(45deg, #ffc8dd, #ffafcc, #bde0fe, #cdb4db);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* --- Bento Grid Layout --- */
-        .wrapper {
-            width: 100%;
-            max-width: 500px;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 10px;
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 8px; height: 8px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            margin-right: 8px;
-            box-shadow: 0 0 10px var(--accent-gold);
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #fff;
-        }
-
-        .loc {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* --- Bento Cards --- */
-        .bento-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            transition: border 0.3s ease;
-        }
-
-        .bento-card:hover { border-color: var(--accent-purple); }
-
-        .label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--accent-purple);
-            margin-bottom: 12px;
-            display: block;
-            font-weight: bold;
-        }
-
-        .bio-text { font-size: 1.1rem; font-weight: 300; }
-        .bio-text span { color: var(--accent-gold); font-weight: 500; }
-
-        /* --- The "Stardust" Game Engine --- */
-        #game-canvas-container {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: #000;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        canvas { display: block; width: 100%; height: 100%; }
-
-        .score-ui {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            margin-bottom: 8px;
-            color: var(--text-dim);
-        }
-
-        /* --- Founder Style Joystick --- */
-        .control-pad {
-            margin-top: 20px;
-            height: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        #joy-base {
-            width: 100px; height: 100px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            position: relative;
-            background: rgba(255,255,255,0.02);
-            touch-action: none;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        #joy-thumb {
-            width: 40px; height: 40px;
-            background: var(--accent-purple);
-            border-radius: 50%;
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px rgba(123, 44, 191, 0.4);
-        }
-
-        /* --- Terminal Navbar --- */
-        .navbar {
+        /* --- Floating Magic Elements --- */
+        .magic-item {
             position: fixed;
-            bottom: 24px;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 6s infinite ease-in-out;
+            font-size: 2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+        }
+
+        /* --- Main Magical Card --- */
+        .card {
+            background: var(--white);
+            backdrop-filter: blur(10px);
+            border: 8px solid white;
+            border-radius: 50px;
+            padding: 40px 20px;
             width: 90%;
             max-width: 400px;
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 20px 0px rgba(205, 180, 219, 0.5);
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3rem;
+            color: #ff70a6;
+            margin-bottom: 10px;
+            animation: wobble 3s infinite ease-in-out;
+            text-shadow: 4px 4px 0 white;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg) scale(1.05); }
+        }
+
+        .tagline {
+            background: var(--blue);
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
             border-radius: 50px;
-            height: 60px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(162, 210, 255, 0.5);
         }
 
-        .nav-item {
-            color: var(--text-dim);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            text-decoration: none;
-            cursor: pointer;
+        /* --- Info Sections --- */
+        .info-bit {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 0.8s forwards;
+        }
+        .info-bit:nth-child(1) { animation-delay: 0.5s; }
+        .info-bit:nth-child(2) { animation-delay: 0.7s; }
+        .info-bit:nth-child(3) { animation-delay: 0.9s; }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        .nav-item.active { color: var(--accent-gold); }
+        .icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 5px;
+            animation: heartBeat 1.5s infinite;
+        }
 
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        h3 { color: #b185db; font-size: 1.4rem; margin-bottom: 5px; }
+        p { color: #5e548e; line-height: 1.4; font-weight: 500; }
+
+        /* --- Interactive Sparkles --- */
+        .sparkle {
+            position: absolute;
+            background: white;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s linear forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: translate(0,0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        footer {
+            margin-top: 30px;
+            font-weight: 700;
+            color: #ff99c8;
+            letter-spacing: 2px;
+        }
     </style>
 </head>
-<body>
+<body onmousemove="createSparkle(event)" ontouchmove="createSparkle(event)">
 
-    <div class="wrapper">
-        <header>
-            <div class="loc"><span class="status-dot"></span>Vandana Convent // 8th Grade</div>
-            <h1>Akshta Chhari</h1>
-            <div class="loc">Artist & Future Scientist</div>
-        </header>
+    <div class="magic-item" style="top:10%; left:10%; animation-delay: 0s;">🌈</div>
+    <div class="magic-item" style="top:60%; right:15%; animation-delay: -2s;">⭐</div>
+    <div class="magic-item" style="top:80%; left:20%; animation-delay: -4s;">☁️</div>
+    <div class="magic-item" style="top:20%; right:5%; animation-delay: -1s;">💖</div>
 
-        <div class="bento-card">
-            <span class="label">// MISSION_STATEMENT</span>
-            <p class="bio-text">Bridging the gap between <span>Fine Art</span> and <span>Scientific Theory</span>. Dedicated to sketching the unseen world.</p>
+    <div class="card">
+        <h1>Akshta Chhari</h1>
+        <div class="tagline">Magical Grade 8 Student</div>
+
+        <div class="info-bit">
+            <span class="icon">🎨</span>
+            <h3>Artist Talent</h3>
+            <p>I specialize in Drawing, Sketching, and Painting vibrant worlds!</p>
         </div>
 
-        <div class="bento-card" style="padding: 15px;">
-            <div class="score-ui">
-                <span>SYSTEM.LOG: COLLISION_COUNT_<span id="score">0</span></span>
-                <span>HI_SCORE: <span id="hi">0</span></span>
-            </div>
-            <div id="game-canvas-container">
-                <canvas id="game" width="300" height="300"></canvas>
-            </div>
-            <div class="control-pad">
-                <div id="joy-base">
-                    <div id="joy-thumb"></div>
-                </div>
-            </div>
+        <div class="info-bit">
+            <span class="icon">🔬</span>
+            <h3>Science Seeker</h3>
+            <p>Exploring the wonders of the universe at Vandana Convent School.</p>
         </div>
 
-        <div class="bento-card">
-            <span class="label">// CORE_STACK</span>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Oil Painting</code>
-                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Microbiology</code>
-                <code style="background:#1a1a1a; padding:4px 8px; border-radius:4px; font-size:0.75rem; color:var(--accent-purple);">Charcoal Sketching</code>
-            </div>
+        <div class="info-bit">
+            <span class="icon">✨</span>
+            <h3>Dreamer</h3>
+            <p>Believing in the magic of friendship and creativity every single day.</p>
         </div>
-    </div>
 
-    <div class="navbar">
-        <span class="nav-item active" onclick="location.reload()">ROOT/</span>
-        <span class="nav-item">WORKS/</span>
-        <span class="nav-item">RESEARCH/</span>
+        <footer>STAY MAGICAL</footer>
     </div>
 
     <script>
-        const canvas = document.getElementById('game');
-        const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('score');
-        
-        let snake = [{x: 10, y: 10}];
-        let food = {x: 5, y: 5};
-        let dx = 1, dy = 0;
-        let score = 0;
-        const size = 15;
-
-        function init() {
-            snake = [{x: 10, y: 10}];
-            dx = 1; dy = 0; score = 0;
-            scoreDisplay.innerText = score;
-            spawnFood();
+        function createSparkle(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            // Handle both mouse and touch
+            const x = e.clientX || e.touches[0].clientX;
+            const y = e.clientY || e.touches[0].clientY;
+            
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            
+            // Random direction for particles
+            const moveX = (Math.random() - 0.5) * 100;
+            const moveY = (Math.random() - 0.5) * 100;
+            sparkle.style.setProperty('--x', moveX + 'px');
+            sparkle.style.setProperty('--y', moveY + 'px');
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
         }
-
-        function spawnFood() {
-            food = {
-                x: Math.floor(Math.random() * 20),
-                y: Math.floor(Math.random() * 20)
-            };
-        }
-
-        function update() {
-            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-
-            if(head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20 || snake.some(s => s.x === head.x && s.y === head.y)) {
-                init();
-            } else {
-                snake.unshift(head);
-                if(head.x === food.x && head.y === food.y) {
-                    score++;
-                    scoreDisplay.innerText = score;
-                    if(navigator.vibrate) navigator.vibrate(20);
-                    spawnFood();
-                } else {
-                    snake.pop();
-                }
-            }
-            draw();
-            setTimeout(update, 120);
-        }
-
-        function draw() {
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0,0,300,300);
-
-            // Food (Element of Harmony)
-            ctx.shadowBlur = 10; ctx.shadowColor = '#ffb703';
-            ctx.fillStyle = '#ffb703';
-            ctx.beginPath();
-            ctx.arc(food.x*size+7.5, food.y*size+7.5, 4, 0, Math.PI*2);
-            ctx.fill();
-
-            // Snake (Stardust Trail)
-            snake.forEach((s, i) => {
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = i === 0 ? '#7b2cbf' : 'rgba(123, 44, 191, 0.3)';
-                ctx.fillStyle = i === 0 ? '#7b2cbf' : 'rgba(123, 44, 191, '+(1 - i/snake.length)+')';
-                ctx.beginPath();
-                ctx.arc(s.x*size+7.5, s.y*size+7.5, 6 - (i*0.3), 0, Math.PI*2);
-                ctx.fill();
-            });
-            ctx.shadowBlur = 0;
-        }
-
-        // Joystick Control
-        const base = document.getElementById('joy-base');
-        const thumb = document.getElementById('joy-thumb');
-        
-        base.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const rect = base.getBoundingClientRect();
-            const x = touch.clientX - (rect.left + 50);
-            const y = touch.clientY - (rect.top + 50);
-            const dist = Math.min(Math.sqrt(x*x + y*y), 40);
-            const angle = Math.atan2(y, x);
-
-            thumb.style.transform = `translate(calc(-50% + ${Math.cos(angle)*dist}px), calc(-50% + ${Math.sin(angle)*dist}px))`;
-
-            if(dist > 20) {
-                if(Math.abs(x) > Math.abs(y)) { dx = x > 0 ? 1 : -1; dy = 0; }
-                else { dy = y > 0 ? 1 : -1; dx = 0; }
-            }
-        });
-
-        base.addEventListener('touchend', () => thumb.style.transform = 'translate(-50%, -50%)');
-
-        init();
-        update();
     </script>
 </body>
 </html>
